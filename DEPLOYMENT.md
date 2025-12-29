@@ -38,6 +38,6 @@ VITE_SUPABASE_ANON_KEY=your_anon_key
 > You must update your Supabase Auth settings to redirect to your production URL.
 
 1.  Go to Supabase Dashboard > **Authentication** > **URL Configuration**.
-2.  Set **Site URL** to `https://ecom-shop-silk.vercel.app/`.
-3.  Add `https://ecom-shop-silk.vercel.app/**` to **Redirect URLs**.
+2.  Set **Site URL** to `https://ecom-shop-y7a8.vercel.app/`.
+3.  Add `https://ecom-shop-y7a8.vercel.app/**` to **Redirect URLs**.
 4.  If using Vercel, simply deploy and ensure the Environment Variables are set.
