@@ -25,13 +25,24 @@ create policy "Users can update own profile."
   using ( auth.uid() = id );
   -- Admin policy implicitly covered or added if needed, but for now admins are just users with role 'admin'
   -- Ideally specific admin policies:
+create or replace function public.is_admin()
+returns boolean as $$
+begin
+  return exists (
+    select 1 from public.profiles
+    where id = auth.uid()
+    and role = 'admin'
+  );
+end;
+$$ language plpgsql security definer;
+
 create policy "Admins can view all profiles"
   on profiles for select
-  using ( exists (select 1 from profiles where id = auth.uid() and role = 'admin') );
-  
+  using ( is_admin() );
+
 create policy "Admins can update all profiles"
   on profiles for update
-  using ( exists (select 1 from profiles where id = auth.uid() and role = 'admin') );
+  using ( is_admin() );
 
 
 -- Function to handle new user signup
