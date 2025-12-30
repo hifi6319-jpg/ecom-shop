@@ -47,7 +47,15 @@ export default function ProductDetail() {
                         price: 599,
                         image_url: '/images/product-navy.png',
                         description: 'Premium quality navy cotton t-shirt. Made from 100% organic cotton for breathability and comfort.',
-                        variants: [{ id: 101, size: 'M', color: 'Navy' }, { id: 102, size: 'L', color: 'Navy' }]
+                        variants: [
+                            { id: 100, size: 'XS', color: 'Navy' },
+                            { id: 101, size: 'S', color: 'Navy' },
+                            { id: 102, size: 'M', color: 'Navy' },
+                            { id: 103, size: 'L', color: 'Navy' },
+                            { id: 104, size: 'XL', color: 'Navy' },
+                            { id: 105, size: 'XXL', color: 'Navy' },
+                            { id: 106, size: '3XL', color: 'Navy' }
+                        ]
                     },
                     {
                         id: 2,
@@ -55,7 +63,15 @@ export default function ProductDetail() {
                         price: 599,
                         image_url: '/images/product-red.png',
                         description: 'Bold red casual t-shirt. Stand out from the crowd with this vibrant color.',
-                        variants: [{ id: 201, size: 'S', color: 'Red' }]
+                        variants: [
+                            { id: 200, size: 'XS', color: 'Red' },
+                            { id: 201, size: 'S', color: 'Red' },
+                            { id: 202, size: 'M', color: 'Red' },
+                            { id: 203, size: 'L', color: 'Red' },
+                            { id: 204, size: 'XL', color: 'Red' },
+                            { id: 205, size: 'XXL', color: 'Red' },
+                            { id: 206, size: '3XL', color: 'Red' }
+                        ]
                     },
                     {
                         id: 3,
@@ -63,7 +79,15 @@ export default function ProductDetail() {
                         price: 549,
                         image_url: 'https://placehold.co/400x400/000000/FFFFFF/png?text=Black+Tee',
                         description: 'Classic black tee for everyday wear. A wardrobe staple.',
-                        variants: [{ id: 301, size: 'L', color: 'Black' }]
+                        variants: [
+                            { id: 300, size: 'XS', color: 'Black' },
+                            { id: 301, size: 'S', color: 'Black' },
+                            { id: 302, size: 'M', color: 'Black' },
+                            { id: 303, size: 'L', color: 'Black' },
+                            { id: 304, size: 'XL', color: 'Black' },
+                            { id: 305, size: 'XXL', color: 'Black' },
+                            { id: 306, size: '3XL', color: 'Black' }
+                        ]
                     },
                     {
                         id: 4,
@@ -71,7 +95,15 @@ export default function ProductDetail() {
                         price: 549,
                         image_url: 'https://placehold.co/400x400/FFFFFF/000000/png?text=White+Tee',
                         description: 'Crisp white tee, essential for any wardrobe.',
-                        variants: [{ id: 401, size: 'M', color: 'White' }]
+                        variants: [
+                            { id: 400, size: 'XS', color: 'White' },
+                            { id: 401, size: 'S', color: 'White' },
+                            { id: 402, size: 'M', color: 'White' },
+                            { id: 403, size: 'L', color: 'White' },
+                            { id: 404, size: 'XL', color: 'White' },
+                            { id: 405, size: 'XXL', color: 'White' },
+                            { id: 406, size: '3XL', color: 'White' }
+                        ]
                     }
                 ]
                 // eslint-disable-next-line eqeqeq
@@ -156,18 +188,18 @@ export default function ProductDetail() {
 
                 {/* Description */}
                 <div className="mt-6">
-                    <p className="text-base text-gray-700 leading-relaxed">{product.description}</p>
+                    <p className="text-base text-black font-medium leading-relaxed">{product.description}</p>
                 </div>
 
                 {/* Size Selection */}
                 <div className="mt-8">
-                    <h3 className="text-sm font-bold text-luxury uppercase tracking-wider">Size</h3>
-                    <div className="mt-3 flex items-center gap-3">
+                    <h3 className="text-sm font-extrabold text-black uppercase tracking-wider">Size</h3>
+                    <div className="mt-3 flex flex-wrap gap-2 sm:gap-3">
                         {availableSizes.map(s => (
                             <button
                                 key={s}
                                 onClick={() => { setSelectedSize(s); setSelectedColor('') }}
-                                className={`px-6 py-3 border text-sm font-bold uppercase tracking-wider transition-all ${selectedSize === s ? 'bg-luxury text-white border-luxury' : 'bg-white text-luxury border-gray-300 hover:border-luxury'}`}
+                                className={`px-4 sm:px-6 py-3 border-2 text-sm font-extrabold uppercase tracking-wider transition-all ${selectedSize === s ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-300 hover:border-black'}`}
                             >
                                 {s}
                             </button>
@@ -177,14 +209,14 @@ export default function ProductDetail() {
 
                 {/* Color Selection */}
                 <div className="mt-6">
-                    <h3 className="text-sm font-bold text-luxury uppercase tracking-wider">Color</h3>
-                    <div className="mt-3 flex items-center gap-3">
+                    <h3 className="text-sm font-extrabold text-black uppercase tracking-wider">Color</h3>
+                    <div className="mt-3 flex flex-wrap gap-2 sm:gap-3">
                         {availableColors.map(c => (
                             <button
                                 key={c}
                                 onClick={() => setSelectedColor(c)}
                                 disabled={!selectedSize}
-                                className={`px-6 py-3 border text-sm font-bold uppercase tracking-wider transition-all ${selectedColor === c ? 'bg-luxury text-white border-luxury' : 'bg-white text-luxury border-gray-300 hover:border-luxury'} ${!selectedSize ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`px-4 sm:px-6 py-3 border-2 text-sm font-extrabold uppercase tracking-wider transition-all ${selectedColor === c ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-300 hover:border-black'} ${!selectedSize ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 {c}
                             </button>
@@ -197,7 +229,7 @@ export default function ProductDetail() {
                     <button
                         onClick={addToCart}
                         disabled={adding}
-                        className="w-full btn-gold py-4 text-base font-bold uppercase tracking-wider"
+                        className="w-full btn-gold py-4 text-base font-extrabold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all"
                     >
                         {adding ? 'Adding...' : 'Add to Cart'}
                     </button>

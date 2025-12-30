@@ -84,7 +84,8 @@ export default function ProductList() {
             setCategories([
                 { id: 1, name: 'Men' },
                 { id: 2, name: 'Women' },
-                { id: 3, name: 'Unisex' }
+                { id: 3, name: 'Boys' },
+                { id: 4, name: 'Unisex' }
             ])
         } finally {
             setLoading(false)
@@ -133,9 +134,9 @@ export default function ProductList() {
                         <div className="space-y-2">
                             <button
                                 onClick={() => setSearchParams({})}
-                                className={`block w-full text-left px-4 py-2 rounded-lg transition-all ${!selectedCategory
-                                    ? 'bg-gradient-primary text-white font-semibold shadow-md'
-                                    : 'text-gray-700 hover:bg-gray-100'
+                                className={`block w-full text-left px-4 py-3 rounded-xl transition-all border ${!selectedCategory
+                                    ? 'bg-gradient-primary text-white font-bold shadow-lg border-transparent'
+                                    : 'bg-white text-gray-900 border-gray-200 hover:border-gray-300 hover:shadow-sm font-medium'
                                     }`}
                             >
                                 All Products
@@ -144,9 +145,9 @@ export default function ProductList() {
                                 <button
                                     key={c.id}
                                     onClick={() => setSearchParams({ category: c.name })}
-                                    className={`block w-full text-left px-4 py-2 rounded-lg transition-all ${selectedCategory === c.name
-                                        ? 'bg-gradient-primary text-white font-semibold shadow-md'
-                                        : 'text-gray-700 hover:bg-gray-100'
+                                    className={`block w-full text-left px-4 py-3 rounded-xl transition-all border ${selectedCategory === c.name
+                                        ? 'bg-gradient-primary text-white font-bold shadow-lg border-transparent'
+                                        : 'bg-white text-gray-900 border-gray-200 hover:border-gray-300 hover:shadow-sm font-medium'
                                         }`}
                                 >
                                     {c.name}
@@ -165,9 +166,9 @@ export default function ProductList() {
                                 <button
                                     key={size}
                                     onClick={() => setSelectedSize(selectedSize === size ? '' : size)}
-                                    className={`px-5 py-3 text-sm font-semibold rounded-xl border-2 transition-all hover-lift ${selectedSize === size
+                                    className={`px-5 py-3 text-sm font-bold rounded-xl border-2 transition-all hover-lift ${selectedSize === size
                                         ? 'bg-gradient-primary text-white border-transparent shadow-lg'
-                                        : 'bg-white text-gray-700 border-gray-200 hover:border-purple-300'
+                                        : 'bg-white text-gray-900 border-gray-200 hover:border-gray-400'
                                         }`}
                                 >
                                     {size}
@@ -187,8 +188,8 @@ export default function ProductList() {
                                     key={color}
                                     onClick={() => setSelectedColor(selectedColor === color ? '' : color)}
                                     className={`group relative flex items-center gap-2 px-4 py-3 rounded-xl border-2 transition-all hover-lift ${selectedColor === color
-                                        ? 'border-purple-600 bg-purple-50'
-                                        : 'border-gray-200 bg-white hover:border-gray-300'
+                                        ? 'bg-gradient-primary text-white border-transparent shadow-lg'
+                                        : 'border-gray-200 bg-white hover:border-gray-400'
                                         }`}
                                     title={color}
                                 >
@@ -196,7 +197,7 @@ export default function ProductList() {
                                         className={`w-6 h-6 rounded-full border-2 ${color === 'White' ? 'border-gray-300' : 'border-transparent'}`}
                                         style={{ backgroundColor: colorMap[color] || '#999' }}
                                     />
-                                    <span className="text-sm font-medium text-gray-700">{color}</span>
+                                    <span className={`text-sm font-bold ${selectedColor === color ? 'text-white' : 'text-gray-900'}`}>{color}</span>
                                 </button>
                             ))}
                         </div>
@@ -207,17 +208,17 @@ export default function ProductList() {
                         <div className="pt-6 border-t border-gray-200">
                             <button
                                 onClick={clearFilters}
-                                className="w-full px-4 py-2 text-sm font-semibold text-red-600 border-2 border-red-600 rounded-xl hover:bg-red-50 transition-colors"
+                                className="w-full px-4 py-2 text-sm font-bold text-red-600 border-2 border-red-600 rounded-xl hover:bg-red-50 transition-colors"
                             >
                                 Clear All Filters
                             </button>
                         </div>
                     )}
                 </div>
-            </aside>
+            </aside >
 
             {/* Product Grid */}
-            <div className="flex-1">
+            < div className="flex-1" >
                 <div className="mb-6 flex justify-between items-center">
                     <h2 className="text-3xl font-bold gradient-text">
                         {selectedCategory || 'All Products'}
@@ -227,97 +228,98 @@ export default function ProductList() {
                     </p>
                 </div>
 
-                {loading ? (
-                    /* Loading Skeletons */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[...Array(6)].map((_, i) => (
-                            <div key={i} className="premium-card animate-pulse">
-                                <div className="aspect-square bg-gray-200 shimmer" />
-                                <div className="p-6 space-y-3">
-                                    <div className="h-4 bg-gray-200 rounded shimmer" />
-                                    <div className="h-3 bg-gray-200 rounded w-2/3 shimmer" />
-                                    <div className="h-6 bg-gray-200 rounded w-1/3 shimmer" />
+                {
+                    loading ? (
+                        /* Loading Skeletons */
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {[...Array(6)].map((_, i) => (
+                                <div key={i} className="premium-card animate-pulse">
+                                    <div className="aspect-square bg-gray-200 shimmer" />
+                                    <div className="p-6 space-y-3">
+                                        <div className="h-4 bg-gray-200 rounded shimmer" />
+                                        <div className="h-3 bg-gray-200 rounded w-2/3 shimmer" />
+                                        <div className="h-6 bg-gray-200 rounded w-1/3 shimmer" />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : filteredProducts.length === 0 ? (
-                    /* Empty State */
-                    <div className="text-center py-20">
-                        <div className="inline-block p-8 bg-gradient-mesh rounded-3xl mb-6">
-                            <Heart className="h-16 w-16 text-gray-400" />
+                            ))}
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">No products found</h3>
-                        <div className="sticky bottom-0 pt-6 pb-2 bg-white/95 backdrop-blur-sm z-50">
+                    ) : filteredProducts.length === 0 ? (
+                        /* Empty State */
+                        <div className="text-center py-20">
+                            <div className="inline-block p-8 bg-gradient-mesh rounded-3xl mb-6">
+                                <Heart className="h-16 w-16 text-gray-400" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">No products found</h3>
+                            <p className="text-gray-500 mb-8">Try adjusting your filters or category.</p>
                             <button
                                 onClick={clearFilters}
-                                className="w-full flex items-center justify-center gap-2 p-4 text-red-600 font-bold bg-red-50 hover:bg-red-100 rounded-xl transition-all hover-lift border-2 border-red-100"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 font-bold rounded-xl border-2 border-red-100 hover:bg-red-100 hover:border-red-200 transition-all hover-lift"
                             >
                                 <X className="h-5 w-5" />
                                 Clear All Filters
                             </button>
                         </div>
-                    </div>
-                ) : (
-                    /* Product Grid */
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredProducts.map((product, index) => (
-                            <Link
-                                key={product.id}
-                                to={`/products/${product.id}`}
-                                className="group premium-card animate-fade-in-up"
-                                style={{ animationDelay: `${index * 50}ms` }}
-                            >
-                                <div className="relative aspect-square overflow-hidden bg-gray-100">
-                                    <img
-                                        src={product.image_url || 'https://via.placeholder.com/400'}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    ) : (
+                        /* Product Grid */
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredProducts.map((product, index) => (
+                                <Link
+                                    key={product.id}
+                                    to={`/products/${product.id}`}
+                                    className="group premium-card animate-fade-in-up"
+                                    style={{ animationDelay: `${index * 50}ms` }}
+                                >
+                                    <div className="relative aspect-square overflow-hidden bg-gray-100">
+                                        <img
+                                            src={product.image_url || 'https://via.placeholder.com/400'}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                    {/* Wishlist Heart */}
-                                    <button
-                                        className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all hover:scale-110 hover:bg-white"
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            // Add to wishlist logic here
-                                        }}
-                                    >
-                                        <Heart className="h-5 w-5 text-gray-700" />
-                                    </button>
+                                        {/* Wishlist Heart */}
+                                        <button
+                                            className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all hover:scale-110 hover:bg-white"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                // Add to wishlist logic here
+                                            }}
+                                        >
+                                            <Heart className="h-5 w-5 text-gray-700" />
+                                        </button>
 
-                                    {/* Quick View */}
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span className="btn-primary text-sm py-2 px-6 text-white hover:text-white border-white hover:border-white">
-                                            Quick View
-                                        </span>
+                                        {/* Quick View */}
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span className="btn-primary text-sm py-2 px-6 text-white hover:text-white border-white hover:border-white">
+                                                Quick View
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="p-6">
-                                    <div className="flex items-center gap-1 mb-2">
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star
-                                                key={i}
-                                                className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                                            />
-                                        ))}
-                                        <span className="text-sm text-gray-600 ml-2">(4.8)</span>
+                                    <div className="p-6">
+                                        <div className="flex items-center gap-1 mb-2">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                                                />
+                                            ))}
+                                            <span className="text-sm text-gray-600 ml-2">(4.8)</span>
+                                        </div>
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors line-clamp-2">
+                                            {product.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-500 mb-3 line-clamp-1">
+                                            {product.description || 'Premium Quality T-Shirt'}
+                                        </p>
+                                        <p className="text-2xl font-bold gradient-text">₹{product.price}</p>
                                     </div>
-                                    <h3 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors line-clamp-2">
-                                        {product.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-500 mb-3 line-clamp-1">
-                                        {product.description || 'Premium Quality T-Shirt'}
-                                    </p>
-                                    <p className="text-2xl font-bold gradient-text">₹{product.price}</p>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                )}
-            </div>
+                                </Link>
+                            ))}
+                        </div>
+                    )
+                }
+            </div >
         </div >
     )
 }
