@@ -1,5 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { useState } from 'react'
 import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import SplashScreen from './components/common/SplashScreen'
+import ScrollToTop from './components/common/ScrollToTop'
 import { useAuth } from './context/AuthContext'
 
 // Pages
@@ -10,6 +14,7 @@ import Cart from './pages/shop/Cart'
 import Login from './pages/auth/Login'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import Profile from './pages/shop/Profile'
+import Wishlist from './pages/shop/Wishlist'
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
@@ -24,23 +29,30 @@ function AdminRoute({ children }) {
 }
 
 function App() {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+  const [showSplash, setShowSplash] = useState(true);
 
-            <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-          </Routes>
-        </div>
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Splash Screen - Shows on top */}
+      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+
+      <ScrollToTop />
+
+      <Navbar />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-10"><Products /></div>} />
+          <Route path="/products/:id" element={<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-10"><ProductDetail /></div>} />
+          <Route path="/cart" element={<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-10"><Cart /></div>} />
+          <Route path="/wishlist" element={<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-10"><Wishlist /></div>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<PrivateRoute><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-10"><Profile /></div></PrivateRoute>} />
+
+          <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+        </Routes>
       </main>
+      <Footer />
     </div>
   )
 }
